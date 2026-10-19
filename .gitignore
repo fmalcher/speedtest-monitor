@@ -1,0 +1,5 @@
+# Speedtest results (keep the directory itself)
+data/*
+!data/.gitkeep
+
+.DS_Store

@@ -1,0 +1,15 @@
+# Speedtest server IDs; one is picked at random for each run.
+# One ID per line, "#" starts a comment. Leave empty to let Ookla auto-select.
+48782 # Thüringer Netkom, Jena
+61837 # e.discom Telekommunikation GmbH, Rostock
+3865  # KABEL-TV-BINZ
+54401 # TELTA Citynetz GmbH, Eberswalde
+11519 # TELE AG, Leipzig
+17137 # Cronon GmbH, Berlin
+4556  # TNG Stadtnetz GmbH, Kiel
+14014 # Hiper, Copenhagen
+69560 # Eins Energie in Sachsen, Chemnitz
+39849 # LanTech, Szczecin
+44599 # Stadtwerke Lübeck GmbH, Lübeck
+7905  # Stadtwerke Finsterwalde
+17982 # wittenberg-net GmbH

@@ -1,0 +1,25 @@
+services:
+  speedtest:
+    build: ./runner
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Berlin
+      CRON_SCHEDULE: "0 12 * * *"
+      RUN_ON_START: "true"
+      MAX_ATTEMPTS: "3"
+    volumes:
+      - ./data:/data
+      - ./config:/etc/speedtest:ro
+
+  web:
+    image: php:8.3-apache
+    restart: unless-stopped
+    depends_on:
+      - speedtest
+    environment:
+      TZ: Europe/Berlin
+    ports:
+      - "16000:80"
+    volumes:
+      - ./web/index.php:/var/www/html/index.php:ro
+      - ./data:/var/www/html/data:ro
