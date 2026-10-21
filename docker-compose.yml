@@ -12,7 +12,7 @@ services:
       - ./config:/etc/speedtest:ro
 
   web:
-    image: php:8.3-apache
+    image: php:8.5-apache
     restart: unless-stopped
     depends_on:
       - speedtest
