@@ -17,4 +17,5 @@ docker compose logs -f speedtest                 # logs
 
 - **Schedule and options:** set them in `docker-compose.yml`: `CRON_SCHEDULE`, `TZ`, `RUN_ON_START` (also test when the container starts), and `MAX_ATTEMPTS` (servers to try before Ookla picks one automatically).
 - **Servers:** `config/servers.txt` holds one ID per line, and `#` starts a comment. Edits apply from the next run. To list nearby servers, run `docker compose exec speedtest speedtest -L`.
-- **Warning threshold and display time zone:** set them at the top of `web/index.php`.
+- **Warning thresholds:** set `DOWNLOAD_THRESHOLD_MBPS` and `UPLOAD_THRESHOLD_MBPS` for the `web` service in `docker-compose.yml` (default `75`). Results below these values are highlighted. Apply changes with `docker compose up -d`.
+- **Display time zone:** set it at the top of `web/index.php`.

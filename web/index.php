@@ -4,8 +4,15 @@
 declare(strict_types=1);
 
 $DATA_DIR = __DIR__ . '/data';
-// $WARNING_THRESHOLD = 10000000; // 80 Mbps
-$WARNING_THRESHOLD = 9375000; // 75 Mbps
+
+// Warning thresholds in Mbps, configurable via env vars. Results below are highlighted.
+function env_mbps(string $name, float $default): float {
+    $value = getenv($name);
+    return ($value !== false && is_numeric($value)) ? (float)$value : $default;
+}
+// Convert Mbps to bytes/s, the unit Ookla reports bandwidth in
+$DOWNLOAD_THRESHOLD = env_mbps('DOWNLOAD_THRESHOLD_MBPS', 75) * 1000 * 1000 / 8;
+$UPLOAD_THRESHOLD = env_mbps('UPLOAD_THRESHOLD_MBPS', 75) * 1000 * 1000 / 8;
 $DISPLAY_TIMEZONE = new DateTimeZone('Europe/Berlin');
 
 function h($s) {
@@ -209,8 +216,8 @@ $summary = [
       <tr>
         <td class="mono"><?php echo h($dtstr); ?></td>
         <td><?php echo is_numeric($ping) ? sprintf('%.3f ms', $ping) : h($ping); ?></td>
-        <td<?php echo $download_bw < $WARNING_THRESHOLD ? ' class="highlight"' : '' ?>><?php echo h(human_bandwidth($download_bw)); ?></td>
-        <td<?php echo $upload_bw < $WARNING_THRESHOLD ? ' class="highlight"' : '' ?>><?php echo h(human_bandwidth($upload_bw)); ?></td>
+        <td<?php echo $download_bw < $DOWNLOAD_THRESHOLD ? ' class="highlight"' : '' ?>><?php echo h(human_bandwidth($download_bw)); ?></td>
+        <td<?php echo $upload_bw < $UPLOAD_THRESHOLD ? ' class="highlight"' : '' ?>><?php echo h(human_bandwidth($upload_bw)); ?></td>
         <td><?php echo $server_combined; ?></td>
         <td class="mono"><?php echo h($server_ip); ?></td>
         <td><a href="data/<?php echo rawurlencode($filelink); ?>" target="_blank">View</a></td>
